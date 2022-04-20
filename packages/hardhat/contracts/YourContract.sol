@@ -1,27 +1,23 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-import "hardhat/console.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol"; 
-// https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
-
 contract YourContract {
 
-  event SetPurpose(address sender, string purpose);
+  uint public count;
 
-  string public purpose = "Building Unstoppable Apps!!!";
-
-  constructor() payable {
-    // what should we do on deploy?
+  // Function to get the current count
+  function get() public view returns (uint) {
+      return count;
   }
 
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
+  // Function to increment count by 1
+  function inc() public {
+      count += 1;
   }
 
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+  // Function to decrement count by 1
+  function dec() public {
+      // This function will fail if count = 0
+      count -= 1;
+  }
 }
