@@ -6,22 +6,16 @@ import "hardhat/console.sol";
 // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
 contract YourContract {
+    // State variable to store a number
+    uint public num;
 
-  event SetPurpose(address sender, string purpose);
+    // You need to send a transaction to write to a state variable.
+    function set(uint _num) public {
+        num = _num;
+    }
 
-  string public purpose = "Building Unstoppable Apps!!!";
-
-  constructor() payable {
-    // what should we do on deploy?
-  }
-
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
-  }
-
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+    // You can read from a state variable without sending a transaction.
+    function get() public view returns (uint) {
+        return num;
+    }
 }
