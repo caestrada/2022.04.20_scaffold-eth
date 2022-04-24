@@ -1,27 +1,21 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-import "hardhat/console.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol"; 
-// https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
-
 contract YourContract {
+    // coding convention to uppercase constant variables
+    address public immutable MY_ADDRESS;
+    uint public immutable MY_UINT;
+    // uint public immutable MY_UINT2;
 
-  event SetPurpose(address sender, string purpose);
+    // Immutable variables could be set once in the constructor
+    constructor() {
+        MY_ADDRESS = msg.sender;
+        MY_UINT = 123;
+    }
 
-  string public purpose = "Building Unstoppable Apps!!!";
-
-  constructor() payable {
-    // what should we do on deploy?
-  }
-
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
-  }
-
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+    // This won't work since immutables could only be initiallize inline 
+    // or in the constructor. 
+    // function doSomething() public {
+    //     MY_UINT2 = 1;
+    // }
 }
