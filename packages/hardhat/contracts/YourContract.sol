@@ -2,26 +2,22 @@ pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
 import "hardhat/console.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol"; 
-// https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
+// Variables
 contract YourContract {
+    // State variables are stored on the blockchain.
+    string public text = "Hello";
+    uint public num = 123;
 
-  event SetPurpose(address sender, string purpose);
+    function doSomething() public {
+        // Local variables are NOT saved to the blockchain.
+        uint i = 456;
+        console.log('Local variable', i);
 
-  string public purpose = "Building Unstoppable Apps!!!";
-
-  constructor() payable {
-    // what should we do on deploy?
-  }
-
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
-  }
-
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+        // Here are some global variables.
+        uint timestamp = block.timestamp; // Current block timestamp
+        console.log('Current timestamp', timestamp);
+        address sender = msg.sender; // Address of the caller
+        console.log('Address of caller', sender);
+    }
 }
