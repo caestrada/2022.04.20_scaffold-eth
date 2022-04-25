@@ -6,22 +6,9 @@ import "hardhat/console.sol";
 // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
 contract YourContract {
+    uint public oneWei = 1 wei; // 1 wei is equal to 1
+    bool public isOneWei = 1 wei == 1;
 
-  event SetPurpose(address sender, string purpose);
-
-  string public purpose = "Building Unstoppable Apps!!!";
-
-  constructor() payable {
-    // what should we do on deploy?
-  }
-
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
-  }
-
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+    uint public oneEther = 1 ether; // 1 ether is equal to 10^18 wei
+    bool public isOneEther = 1 ether == 1e18;
 }
