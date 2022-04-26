@@ -2,26 +2,26 @@ pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
 import "hardhat/console.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol"; 
-// https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
 contract YourContract {
 
-  event SetPurpose(address sender, string purpose);
+    function foo(uint x) public pure returns (uint) {
+        if (x < 10) {
+            return 0;
+        } else if (x < 20) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
 
-  string public purpose = "Building Unstoppable Apps!!!";
+    function ternary(uint _x) public pure returns (uint) {
+        // if (_x < 10) {
+        //     return 1;
+        // }
+        // return 2;
 
-  constructor() payable {
-    // what should we do on deploy?
-  }
-
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
-  }
-
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+        // shorthand way to write if / else statement
+        return _x < 10 ? 1 : 2;
+    }
 }
