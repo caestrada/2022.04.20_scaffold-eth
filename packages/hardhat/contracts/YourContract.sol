@@ -5,23 +5,51 @@ import "hardhat/console.sol";
 // import "@openzeppelin/contracts/access/Ownable.sol"; 
 // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
+// Array
+// Array can have a compile-time fixed size or a dynamic size.
 contract YourContract {
+    // Several ways to initialize an array
+    uint[] public arr;
+    uint[] public arr2 = [1, 2, 3];
+    // Fixed sized array, all elements initialize to 0
+    uint[10] public myFixedSizeArr;
 
-  event SetPurpose(address sender, string purpose);
+    function get(uint i) public view returns (uint) {
+        return arr[i];
+    }
 
-  string public purpose = "Building Unstoppable Apps!!!";
+    // Solidity can return the entire array.
+    // But this function should be avoided for
+    // arrays that can grow indefinitely in length.
+    function getArr() public view returns (uint[] memory) {
+        return arr;
+    }
 
-  constructor() payable {
-    // what should we do on deploy?
-  }
+    function push(uint i) public {
+        // Append to array
+        // This will increase the array length by 1.
+        arr.push(i);
+    }
 
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
-  }
+    function pop() public {
+        // Remove last element from array
+        // This will decrease the array length by 1
+        arr.pop();
+    }
 
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+    function getLength() public view returns (uint) {
+        return arr.length;
+    }
+
+    function remove(uint index) public {
+        // Delete does not change the array length.
+        // It resets the value at index to it's default value,
+        // in this case 0
+        delete arr[index];
+    }
+
+    function examples() external {
+        // create array in memory, only fixed size can be created
+        uint[] memory a = new uint[](5);
+    }
 }
